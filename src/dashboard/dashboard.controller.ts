@@ -31,12 +31,12 @@ export class DashboardController {
         return await this.dashboardService.deleteDashboard(+id);
     }
 
-    @Put("/test/:id")
+    @Put("/test/:id") //updateData
     async putDashboard(@Param("id") id: number, @Body("numberOfcars") numberOfcars: string) {
         return await this.dashboardService.putDashboard(+id, numberOfcars);
     }
 
-    @Patch("/test/:id")
+    @Patch("/test/:id") //updateData (patch can add a new feature)
     async patchDashboard(@Param("id") id: number, @Body("numberOfcars") numberOfcars: string){
         return await this.dashboardService.patchDashboard(+id, numberOfcars);
     }
