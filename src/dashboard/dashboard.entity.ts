@@ -1,9 +1,26 @@
+export class Car {
+    id: number;
+    carBrand: string;
+    numberOfcars: string;
+    date: string;
+    time: string;
+    parkSpot: string;
+    parkArea: string;
+}
 
 export class Dashboard {
-    id: number;
-    numberOfcars: string;
-    carParking: string;
-    deliveryParking: string;
-    carVIP: string;
+    newDate: string
+    totalCars: number;
+    carParking: number;
+    deliveryParking: number;
+    carVIP: number;
 }
+
+export class Realtime {
+    newDate: string
+    id:number;
+    numberOfcars: string;
+    time: string;
+}
+
 
