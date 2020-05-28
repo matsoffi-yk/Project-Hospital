@@ -9,7 +9,6 @@ export class DashboardController {
     async getData(@Res() res) {
         const data = await this.dashboardService.getData()
         return res.status(HttpStatus.OK).json(data);
-        // return await this.dashboardService.getData();
     }
 
     @Get('/getData/:id') //showData Id
@@ -24,7 +23,7 @@ export class DashboardController {
         return await res.status(HttpStatus.OK).json(Dashboard);
     }
 
-    @Get('/getRealtime') //show Dashboard
+    @Get('/getRealtime') //show realtime
     async getRealtime(@Res() res) {
         const realtime = await this.dashboardService.getRealtime()
         return res.status(HttpStatus.OK).json(realtime);

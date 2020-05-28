@@ -5,15 +5,9 @@ import 'moment-timezone'
 
 @Injectable()
 export class DashboardService {
-    
+
     realtime: Realtime[] = []
-    arrDashboar: Dashboard = {
-        "newDate": "",
-        "totalCars": 0,
-        "carParking": 0,
-        "deliveryParking": 0,
-        "carVIP": 0
-    }
+    arrDashboar: Dashboard[] = []
 
     carData: Car[] = [
         {
@@ -327,27 +321,58 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                this.arrDashboar.newDate = moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY")
-                this.arrDashboar.totalCars = 0
-                this.arrDashboar.carParking = 0
-                this.arrDashboar.deliveryParking = 0
-                this.arrDashboar.carVIP = 0
-
+                const tempDay = []
+                const tempMonth = []
+                const tempyear = []
                 this.carData.forEach((car) => {
-                    if (car.date === this.arrDashboar.newDate) {
-                        this.arrDashboar.totalCars += 1
-                        console.log(`id:${car.id} , ${car.date} / ${this.arrDashboar.newDate}`)
-                        if (car.parkArea === '01') {
-                            this.arrDashboar.carParking += 1
-                        }
-                        else if (car.parkArea === '02') {
-                            this.arrDashboar.deliveryParking += 1
-                        }
-                        else if (car.parkArea === '03') {
-                            this.arrDashboar.carVIP += 1
-                        }
-                    }
+                    const day = car.date.split('/')[0].split(' ')
+                    const month = (car.date.split('/')[1])
+                    const year = (car.date.split('/')[2])
+
+                    tempDay.push(Number(day[1]))
+                    tempMonth.push(Number(month))
+                    tempyear.push(Number(year))
                 })
+
+                const dayMax = Math.max(...tempDay)
+                const monthMax = Math.max(...tempMonth)
+                const yearMax = Math.max(...tempyear)
+
+                const dayMin = Math.min(...tempDay)
+                const monthMin = Math.min(...tempMonth)
+                const yearMin = Math.min(...tempyear)
+                console.log(`${typeof dayMax}, ${typeof monthMax}, ${typeof yearMax}`)
+                console.log(`${typeof dayMin}, ${typeof monthMin}, ${typeof yearMin}`)
+                let i = dayMin
+
+                while (i <= dayMax) {
+                    const newDash = new Dashboard()
+                    newDash.newDate = moment(`${i}-12-2019`, "DD-MM-YYYY").format("ddd DD/MM/YYYY")
+                    newDash.totalCars = 0
+                    newDash.carParking = 0
+                    newDash.deliveryParking = 0
+                    newDash.carVIP = 0
+
+                    this.carData.forEach((car) => {
+                        if (car.date === newDash.newDate) {
+                            newDash.totalCars += 1
+                            // console.log(`id:${car.id} , ${car.date} / ${newDash.newDate}`)
+                            if (car.parkArea === '01') {
+                                newDash.carParking += 1
+                            }
+                            else if (car.parkArea === '02') {
+                                newDash.deliveryParking += 1
+                            }
+                            else if (car.parkArea === '03') {
+                                newDash.carVIP += 1
+                            }
+                        }
+                    })
+                    this.arrDashboar.push(newDash)
+                    console.log(i)
+                    i++
+                }
+
                 return this.arrDashboar;
             }
         } catch (error) {
@@ -364,7 +389,7 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                if (this.realtime.length < this.arrDashboar.totalCars) {
+                // if (this.realtime.length < this.arrDashboar.totalCars) {
                     this.carData.forEach((car) => {
                         if (car.date === moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY")) {
                             const newRealtime = new Realtime();
@@ -375,10 +400,10 @@ export class DashboardService {
                             this.realtime.push(newRealtime)
                         }
                     })
-                }
+                // }
 
                 this.realtime.sort((a, b) => ('' + a.time).localeCompare(b.time))
-                console.log(this.arrDashboar.totalCars )
+                // console.log(this.arrDashboar.totalCars )
                 return this.realtime;
             }
         } catch (error) {
@@ -388,6 +413,4 @@ export class DashboardService {
             });
         }
     }
-
-
 }
