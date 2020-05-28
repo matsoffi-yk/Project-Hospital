@@ -344,7 +344,7 @@ export class DashboardService {
                 console.log(`${typeof dayMax}, ${typeof monthMax}, ${typeof yearMax}`)
                 console.log(`${typeof dayMin}, ${typeof monthMin}, ${typeof yearMin}`)
                 let i = dayMin
-
+                
                 while (i <= dayMax) {
                     const newDash = new Dashboard()
                     newDash.newDate = moment(`${i}-12-2019`, "DD-MM-YYYY").format("ddd DD/MM/YYYY")
