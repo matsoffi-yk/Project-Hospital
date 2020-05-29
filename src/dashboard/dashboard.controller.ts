@@ -28,4 +28,10 @@ export class DashboardController {
         const realtime = await this.dashboardService.getRealtime()
         return res.status(HttpStatus.OK).json(realtime);
     }
+
+    @Get('/getGraph') //show realtime
+    async getGraph(@Res() res) {
+        const graph = await this.dashboardService.getGraph()
+        return res.status(HttpStatus.OK).json(graph);
+    }
 }

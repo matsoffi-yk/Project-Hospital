@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(); //ส่งค่าไป front
+  app.enableCors(); //ส่งค่าไป frontend
   await app.listen(8000);
 }
 bootstrap();

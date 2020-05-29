@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Dashboard, Car, Realtime } from './dashboard.entity'
+import { Dashboard, Car, Realtime, Graph } from './dashboard.entity'
 import * as moment from 'moment';
 import 'moment-timezone'
 
 @Injectable()
 export class DashboardService {
-
+    graph: Graph[] = []
     realtime: Realtime[] = []
     arrDashboar: Dashboard[] = []
 
@@ -14,8 +14,10 @@ export class DashboardService {
             "id": 1,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('24-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:00:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('24-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:00:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -23,8 +25,10 @@ export class DashboardService {
             "id": 2,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:00:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:00:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -32,8 +36,10 @@ export class DashboardService {
             "id": 3,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:01:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:01:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "",
         },
@@ -41,8 +47,10 @@ export class DashboardService {
             "id": 4,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('26-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:00:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('26-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:00:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -50,8 +58,10 @@ export class DashboardService {
             "id": 5,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:02:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:02:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -59,8 +69,10 @@ export class DashboardService {
             "id": 6,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:03:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:03:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -68,8 +80,10 @@ export class DashboardService {
             "id": 7,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:00:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:00:00', "hh:mm:ss")
+            },
             "parkSpot": "A0011",
             "parkArea": "01",
         },
@@ -77,8 +91,10 @@ export class DashboardService {
             "id": 8,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:01:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:01:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -86,8 +102,10 @@ export class DashboardService {
             "id": 9,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:05:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:05:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -95,8 +113,10 @@ export class DashboardService {
             "id": 10,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:04:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:04:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -104,8 +124,10 @@ export class DashboardService {
             "id": 11,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('24-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:01:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('24-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:01:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -113,8 +135,10 @@ export class DashboardService {
             "id": 12,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('24-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:02:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('24-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:02:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -122,8 +146,10 @@ export class DashboardService {
             "id": 13,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:02:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:02:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -131,8 +157,10 @@ export class DashboardService {
             "id": 14,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:03:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:03:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -140,8 +168,10 @@ export class DashboardService {
             "id": 15,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:04:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:04:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -149,8 +179,10 @@ export class DashboardService {
             "id": 16,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:05:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:05:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -158,8 +190,10 @@ export class DashboardService {
             "id": 17,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('26-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:01:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('26-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:01:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -167,8 +201,10 @@ export class DashboardService {
             "id": 18,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:06:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:06:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -176,8 +212,10 @@ export class DashboardService {
             "id": 19,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:07:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:07:00', "hh:mm:ss")
+            },
             "parkSpot": "A0021",
             "parkArea": "02",
         },
@@ -185,8 +223,10 @@ export class DashboardService {
             "id": 20,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:08:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:08:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -194,8 +234,10 @@ export class DashboardService {
             "id": 21,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('24-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:03:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('24-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:03:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -203,8 +245,10 @@ export class DashboardService {
             "id": 22,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('24-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:04:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('24-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:04:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -212,8 +256,10 @@ export class DashboardService {
             "id": 23,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('25-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:06:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('25-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:06:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -221,8 +267,10 @@ export class DashboardService {
             "id": 24,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('26-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:02:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('26-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:02:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -230,8 +278,10 @@ export class DashboardService {
             "id": 25,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:09:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:09:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -239,8 +289,10 @@ export class DashboardService {
             "id": 26,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:10:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:10:00', "hh:mm:ss")
+            },
             "parkSpot": "A0031",
             "parkArea": "03",
         },
@@ -248,8 +300,10 @@ export class DashboardService {
             "id": 27,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:11:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:11:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -257,8 +311,10 @@ export class DashboardService {
             "id": 28,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:12:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:12:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -266,8 +322,10 @@ export class DashboardService {
             "id": 29,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:13:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:13:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -275,8 +333,10 @@ export class DashboardService {
             "id": 30,
             "carBrand": "BMW",
             "numberOfcars": "กด 1938 กรุงเทพ",
-            "date": moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY"),
-            "time": moment('09:14:00', "hh:mm:ss").format("hh:mm:ss"),
+            "dateTime": {
+                "date": moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok'),
+                "time": moment('09:14:00', "hh:mm:ss")
+            },
             "parkSpot": "",
             "parkArea": "",
         },
@@ -321,42 +381,19 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                const tempDay = []
-                const tempMonth = []
-                const tempyear = []
-                this.carData.forEach((car) => {
-                    const day = car.date.split('/')[0].split(' ')
-                    const month = (car.date.split('/')[1])
-                    const year = (car.date.split('/')[2])
+                const nowDay = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
 
-                    tempDay.push(Number(day[1]))
-                    tempMonth.push(Number(month))
-                    tempyear.push(Number(year))
-                })
-
-                const dayMax = Math.max(...tempDay)
-                const monthMax = Math.max(...tempMonth)
-                const yearMax = Math.max(...tempyear)
-
-                const dayMin = Math.min(...tempDay)
-                const monthMin = Math.min(...tempMonth)
-                const yearMin = Math.min(...tempyear)
-                console.log(`${typeof dayMax}, ${typeof monthMax}, ${typeof yearMax}`)
-                console.log(`${typeof dayMin}, ${typeof monthMin}, ${typeof yearMin}`)
-                let i = dayMin
-                
-                while (i <= dayMax) {
+                if (this.arrDashboar.length < 1) {
                     const newDash = new Dashboard()
-                    newDash.newDate = moment(`${i}-12-2019`, "DD-MM-YYYY").format("ddd DD/MM/YYYY")
+                    newDash.newDate = nowDay.tz('Asia/Bangkok')
                     newDash.totalCars = 0
                     newDash.carParking = 0
                     newDash.deliveryParking = 0
                     newDash.carVIP = 0
 
                     this.carData.forEach((car) => {
-                        if (car.date === newDash.newDate) {
+                        if (moment(car.dateTime.date.format()).isSame(newDash.newDate.format())) {
                             newDash.totalCars += 1
-                            // console.log(`id:${car.id} , ${car.date} / ${newDash.newDate}`)
                             if (car.parkArea === '01') {
                                 newDash.carParking += 1
                             }
@@ -369,10 +406,8 @@ export class DashboardService {
                         }
                     })
                     this.arrDashboar.push(newDash)
-                    console.log(i)
-                    i++
                 }
-
+                // console.log(this.arrDashboar)
                 return this.arrDashboar;
             }
         } catch (error) {
@@ -389,22 +424,63 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                // if (this.realtime.length < this.arrDashboar.totalCars) {
+                if (this.realtime.length < this.arrDashboar[0].totalCars) {
+                    const nowDay = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
                     this.carData.forEach((car) => {
-                        if (car.date === moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY")) {
+                        if (moment(car.dateTime.date.format()).isSame(nowDay.format())) {
                             const newRealtime = new Realtime();
-                            newRealtime.newDate = moment('27-12-2019', "DD-MM-YYYY").format("ddd DD/MM/YYYY")
+                            newRealtime.newDate = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
+
                             newRealtime.id = car.id
                             newRealtime.numberOfcars = car.numberOfcars
-                            newRealtime.time = car.time
+                            newRealtime.time = car.dateTime.time
                             this.realtime.push(newRealtime)
                         }
                     })
-                // }
-
-                this.realtime.sort((a, b) => ('' + a.time).localeCompare(b.time))
-                // console.log(this.arrDashboar.totalCars )
+                }
                 return this.realtime;
+            }
+        } catch (error) {
+            throw new NotFoundException({
+                success: false,
+                error: error.message
+            });
+        }
+    }
+
+    async getGraph(): Promise<any> {
+        try {
+            if (!this.carData) {
+                throw new Error('Not found.');
+            }
+            else {
+                const moments = this.carData.map(d => moment(d.dateTime.date))
+                const nowDay = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
+                const lastDay = moment.min(moments)
+                const diffDay = moment(nowDay)
+                    .diff(lastDay, 'day')
+                // console.log(lastDay)
+                // console.log(nowDay)
+                // console.log(diffDay)
+
+                if (this.graph.length < diffDay) {
+                    let i = 0;
+                    while (i <= diffDay) {
+                        const newGraph = new Graph()
+                        newGraph.date = moment(`${lastDay}-12-2019`, "DD-MM-YYYY").tz('Asia/Bangkok').format()
+                        newGraph.totalCars = 0
+
+                        this.carData.forEach((car) => {
+                            if (moment(car.dateTime.date.format()).isSame(newGraph.date)) {
+                                newGraph.totalCars += 1
+                            }
+                        })
+                        this.graph.push(newGraph)
+                        lastDay.add(1, 'd')
+                        i++
+                    }
+                }
+                return this.graph;
             }
         } catch (error) {
             throw new NotFoundException({

@@ -1,15 +1,19 @@
+import { Moment } from "moment";
+
 export class Car {
     id: number;
     carBrand: string;
     numberOfcars: string;
-    date: string;
-    time: string;
+    dateTime: {
+        date: Moment;
+        time: Moment;
+    }
     parkSpot: string;
     parkArea: string;
 }
 
 export class Dashboard {
-    newDate: string
+    newDate: Moment
     totalCars: number;
     carParking: number;
     deliveryParking: number;
@@ -17,10 +21,15 @@ export class Dashboard {
 }
 
 export class Realtime {
-    newDate: string
-    id:number;
+    newDate: Moment;
+    id: number;
     numberOfcars: string;
-    time: string;
+    time: Moment;
+}
+
+export class Graph {
+    date: string;
+    totalCars: number;
 }
 
 
