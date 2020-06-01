@@ -381,11 +381,10 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                const nowDay = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
 
                 if (this.arrDashboar.length < 1) {
                     const newDash = new Dashboard()
-                    newDash.newDate = nowDay.tz('Asia/Bangkok')
+                    newDash.newDate = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
                     newDash.totalCars = 0
                     newDash.carParking = 0
                     newDash.deliveryParking = 0
@@ -430,10 +429,18 @@ export class DashboardService {
                         if (moment(car.dateTime.date.format()).isSame(nowDay.format())) {
                             const newRealtime = new Realtime();
                             newRealtime.newDate = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
-
                             newRealtime.id = car.id
                             newRealtime.numberOfcars = car.numberOfcars
                             newRealtime.time = car.dateTime.time
+
+                            if(car.parkArea === ""){
+                                newRealtime.imgCar = "https://sv1.picz.in.th/images/2020/06/01/qU5wnn.png"
+                            }
+                            else {
+                                newRealtime.imgCar = "https://sv1.picz.in.th/images/2020/06/01/qU55Qb.png"
+                            }
+
+
                             this.realtime.push(newRealtime)
                         }
                     })

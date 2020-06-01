@@ -23,6 +23,7 @@ export class Dashboard {
 export class Realtime {
     newDate: Moment;
     id: number;
+    imgCar:string;
     numberOfcars: string;
     time: Moment;
 }
