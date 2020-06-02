@@ -348,7 +348,7 @@ export class DashboardService {
                 throw new Error('Not found.');
             }
             else {
-                return this.carData;
+                return { success: true, data: this.carData };
             }
         } catch (error) {
             throw new NotFoundException({
@@ -365,7 +365,7 @@ export class DashboardService {
             }
             else {
                 const index = this.carData.findIndex(data => data.id === id)
-                return this.carData[index];
+                return { success: true, data: this.carData[index] };
             }
         } catch (error) {
             throw new NotFoundException({
@@ -407,7 +407,7 @@ export class DashboardService {
                     this.arrDashboar.push(newDash)
                 }
                 // console.log(this.arrDashboar)
-                return this.arrDashboar;
+                return { success: true, data: this.arrDashboar };
             }
         } catch (error) {
             throw new NotFoundException({
@@ -433,7 +433,7 @@ export class DashboardService {
                             newRealtime.numberOfcars = car.numberOfcars
                             newRealtime.time = car.dateTime.time
 
-                            if(car.parkArea === ""){
+                            if (car.parkArea === "") {
                                 newRealtime.imgCar = "https://sv1.picz.in.th/images/2020/06/01/qU5wnn.png"
                             }
                             else {
@@ -445,7 +445,7 @@ export class DashboardService {
                         }
                     })
                 }
-                return this.realtime;
+                return { success: true, data: this.realtime };
             }
         } catch (error) {
             throw new NotFoundException({
@@ -466,7 +466,7 @@ export class DashboardService {
                 const lastDay = moment.min(moments)
                 const diffDay = moment(nowDay)
                     .diff(lastDay, 'day')
-                // console.log(lastDay)
+                // console.log(moments)
                 // console.log(nowDay)
                 // console.log(diffDay)
 
@@ -487,7 +487,7 @@ export class DashboardService {
                         i++
                     }
                 }
-                return this.graph;
+                return { success: true, data: this.graph };
             }
         } catch (error) {
             throw new NotFoundException({
