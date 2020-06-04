@@ -14,12 +14,12 @@ export class UsersService {
             "line": "line",
             "email": "email@email.com",
             "address": {
-                "houseNo": "1",
                 "village": "2",
                 "subDistrict": "subDistrict",
                 "district": "district",
                 "province": "province",
                 "postalCode": "12345",
+                "country":"Thaoland"
             }
         },
     ]

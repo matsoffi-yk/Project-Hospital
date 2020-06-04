@@ -8,11 +8,11 @@ export class Users {
     line: string;
     email: string;
     address: {
-        houseNo: string;
         village: string;
         subDistrict: string;
         district: string;
         province: string;
         postalCode: string;
+        country:string;
     }
 }
