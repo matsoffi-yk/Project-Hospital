@@ -1,37 +1,36 @@
-import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
 
 @Controller('dashboard')
 export class DashboardController {
     constructor(private dashboardService: DashboardService) { }
-
+    //แก้ไข
     @Get('/getData') //showData
-    async getData(@Res() res) {
-        const data = await this.dashboardService.getData()
-        return res.status(HttpStatus.OK).json(data);
+    async getData() {
+        return await this.dashboardService.getData()
     }
 
-    @Get('/getData/:id') //showData Id
-    async getCar(@Param("id") id: string,@Res() res) {
-        const Car = await this.dashboardService.getCar(+id);
-        return res.status(HttpStatus.OK).json(Car);
-    }
+    // @Get('/getData/:id') //showData Id
+    // async getCar(@Param("id", ParseIntPipe) id: number, ) {
+    //     return await this.dashboardService.getCar(id);
+    // }
 
     @Get('/getDashboard') //show Dashboard
-    async getDashboard(@Res() res) {
-        const Dashboard = await this.dashboardService.getDashboard();
-        return await res.status(HttpStatus.OK).json(Dashboard);
+    async getDashboard() {
+        return await this.dashboardService.getDashboard();
     }
 
-    @Get('/getRealtime') //show realtime
-    async getRealtime(@Res() res) {
-        const realtime = await this.dashboardService.getRealtime()
-        return res.status(HttpStatus.OK).json(realtime);
-    }
+    // @Get('/getRealtime') //show realtime
+    // async getRealtime() {
+    //     return await this.dashboardService.getRealtime()
+    // }
 
-    @Get('/getGraph') //show realtime
-    async getGraph(@Res() res) {
-        const graph = await this.dashboardService.getGraph()
-        return res.status(HttpStatus.OK).json(graph);
+    // @Get('/getGraph') //show realtime
+    // async getGraph() {
+    //     return await this.dashboardService.getGraph()
+    // }
+    @Get('/data') //showData
+    async data() {
+        return await this.dashboardService.data()
     }
 }

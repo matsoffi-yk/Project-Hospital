@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Dashboard, Car, Realtime, Graph } from './dashboard.entity'
+import { Car } from './dashboard.entity'
+import { Dashboard, Graph, Realtime } from './dto/data-dashboard.dto'
 import * as moment from 'moment';
 import 'moment-timezone'
 
@@ -439,8 +440,6 @@ export class DashboardService {
                             else {
                                 newRealtime.imgCar = "https://sv1.picz.in.th/images/2020/06/01/qU55Qb.png"
                             }
-
-
                             this.realtime.push(newRealtime)
                         }
                     })
@@ -488,6 +487,23 @@ export class DashboardService {
                     }
                 }
                 return { success: true, data: this.graph };
+            }
+        } catch (error) {
+            throw new NotFoundException({
+                success: false,
+                error: error.message
+            });
+        }
+    }
+
+    async data(): Promise<any> {
+        try {
+            if (!this.carData) {
+                throw new Error('Not found.');
+            }
+            else {
+                console.log(this.arrDashboar)
+                return { success: true, data: this.arrDashboar };
             }
         } catch (error) {
             throw new NotFoundException({

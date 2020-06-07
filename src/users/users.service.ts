@@ -9,7 +9,7 @@ export class UsersService {
             "name": "name",
             "surname": "surname",
             "nickname": "nickname",
-            "age": 0,
+            "age": "0",
             "phoneNumber": "0123456789",
             "line": "line",
             "email": "email@email.com",
@@ -19,7 +19,7 @@ export class UsersService {
                 "district": "district",
                 "province": "province",
                 "postalCode": "12345",
-                "country":"Thaoland"
+                "country": "Thaoland"
             }
         },
     ]
@@ -66,6 +66,13 @@ export class UsersService {
                 throw new Error('Not found.');
             }
             else {
+                const test = '0';
+                if (typeof test === 'string') {
+                    console.log('number')
+                }
+                else if (+test === 0) {
+                    console.log('+number')
+                }
                 if (this.users.find(user => user.id === id)) {
                     updateUser.id = this.users[id - 1].id
                     this.users[id - 1] = updateUser;
