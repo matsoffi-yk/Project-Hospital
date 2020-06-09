@@ -7,7 +7,7 @@ import { Users } from './users.entity';
 export class UsersRepository extends Repository<Users> {
 
     async getUsers(): Promise<Users[]> {
-        const users = this.createQueryBuilder('users').getMany();
+        const users = await this.query(`SELECT * FROM users`);
 
         try {
             return users
@@ -21,12 +21,18 @@ export class UsersRepository extends Repository<Users> {
 
     async createUser(createUserDTO: UsersDTO): Promise<any> {
         const user = new Users();
+        const { username, password } = createUserDTO;
+        const findUsername = await this.createQueryBuilder('users')
+            .andWhere('users.username = :username', { username })
+            .getOne()
 
-        if (createUserDTO.username.length < 4) {
+        if (username.length < 4) {
             return { message: 'username must be longer than 4' };
         }
-        else if (createUserDTO.password.length < 6) {
+        else if (password.length < 6) {
             return { message: 'password must be longer than 6' };
+        } else if (findUsername) {
+            return { message: 'this username already exists' };
         }
 
         user.username = createUserDTO.username

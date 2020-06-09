@@ -438,7 +438,7 @@ export class DashboardService {
                     lastDay.add(1, 'd')
                     i++
                 }
-                return { success: true, data: newDash };
+                return { success: true, dashboard: newDash };
             }
         } catch (error) {
             throw new NotFoundException({
