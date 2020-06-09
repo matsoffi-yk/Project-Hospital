@@ -1,18 +1,36 @@
-export class Users {
-    id: number;
-    name: string;
-    surname: string;
-    nickname: string;
-    age: string;
-    phoneNumber: string;
-    line: string;
-    email: string;
-    address: {
-        village: string;
-        subDistrict: string;
-        district: string;
-        province: string;
-        postalCode: string;
-        country:string;
-    }
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+
+@Entity()
+export class Users extends BaseEntity {
+    @PrimaryGeneratedColumn() id: number;
+
+    @Column() username:string;
+
+    @Column() password:string;
+
+    @Column() name: string;
+
+    @Column() surname: string;
+
+    @Column() nickname: string;
+
+    @Column() age: string;
+
+    @Column() phoneNumber: string;
+
+    @Column() line: string;
+
+    @Column() email: string;
+
+    @Column() village: string;
+
+    @Column() subDistrict: string;
+
+    @Column() district: string;
+
+    @Column() province: string;
+
+    @Column() postalCode: string;
+
+    @Column() country: string;
 }

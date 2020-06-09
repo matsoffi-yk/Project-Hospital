@@ -1,116 +1,59 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UsersDTO } from './dto/user.dto';
 import { Users } from './users.entity';
+import { UsersRepository } from "./users.repository";
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersService {
-    users: Users[] = [
-        {
-            "id": 1,
-            "name": "name",
-            "surname": "surname",
-            "nickname": "nickname",
-            "age": "0",
-            "phoneNumber": "0123456789",
-            "line": "line",
-            "email": "email@email.com",
-            "address": {
-                "village": "2",
-                "subDistrict": "subDistrict",
-                "district": "district",
-                "province": "province",
-                "postalCode": "12345",
-                "country": "Thaoland"
-            }
-        },
-    ]
+
+    constructor(
+        @InjectRepository(UsersRepository) private usersRepository: UsersRepository
+    ) { }
 
     async getUsers(): Promise<any> {
+        const users = await this.usersRepository.getUsers();
+        console.log(users)
+        return { success: true, users: users }
+    }
+
+    async createUser(createUserDTO: UsersDTO): Promise<Users> {
+        return this.usersRepository.createUser(createUserDTO);
+    }
+
+    async updateUser(id: number, updateUser: UsersDTO): Promise<any> {
+        const foundId = await this.usersRepository.findOne(id)
+        const user = foundId;
+
+        user.username = updateUser.username
+        user.password = updateUser.password
+        user.name = updateUser.name
+        user.surname = updateUser.surname
+        user.nickname = updateUser.nickname
+        user.age = updateUser.age
+        user.phoneNumber = updateUser.phoneNumber
+        user.line = updateUser.line
+        user.email = updateUser.email
+        user.village = updateUser.address.village
+        user.subDistrict = updateUser.address.subDistrict
+        user.district = updateUser.address.district
+        user.province = updateUser.address.province
+        user.postalCode = updateUser.address.postalCode
+        user.country = updateUser.address.country
+
         try {
-            if (!this.users) {
-                throw new Error('Not found.');
-            }
-            else {
-                // console.log(`${this.users[0].address}`)
-                return { success: true, data: this.users };
-            }
+            await user.save();
         } catch (error) {
             throw new NotFoundException({
                 success: false,
                 error: error.message
             });
         }
+        return user
     }
 
-    async addUser(createUser): Promise<any> {
-        try {
-            if (!this.users) {
-                throw new Error('Not found.');
-            }
-            else {
-                createUser.id = this.users.length > 0 ? this.users[this.users.length - 1].id + 1 : 1;
-                this.users.push(createUser)
-                // console.log(createUser.address.houseNo)
-                return { success: true, data: this.users[createUser.id - 1] };
-            }
-        } catch (error) {
-            throw new NotFoundException({
-                succress: false,
-                error: error.message
-            });
-        }
-    }
-
-    async updateUser(id, updateUser): Promise<any> {
-        try {
-            if (!this.users) {
-                throw new Error('Not found.');
-            }
-            else {
-                const test = '0';
-                if (typeof test === 'string') {
-                    console.log('number')
-                }
-                else if (+test === 0) {
-                    console.log('+number')
-                }
-                if (this.users.find(user => user.id === id)) {
-                    updateUser.id = this.users[id - 1].id
-                    this.users[id - 1] = updateUser;
-                    return { success: true, data: this.users[id - 1] };
-                }
-                else {
-                    return { success: true, data: `Not found id: ${id}` }
-                }
-
-            }
-        } catch (error) {
-            throw new NotFoundException({
-                succress: false,
-                error: error.message
-            });
-        }
-    }
-
-    async deleteUser(id): Promise<any> {
-        try {
-            if (!this.users) {
-                throw new Error('Not found.');
-            }
-            else {
-                if (this.users.find(data => data.id === id)) {
-                    this.users = this.users.filter(data => data.id !== id)
-                    return { success: true, data: `id: ${id} Deleted` };
-                }
-                else {
-                    return { success: true, data: `Not found id: ${id}` }
-                }
-
-            }
-        } catch (error) {
-            throw new NotFoundException({
-                success: false,
-                error: error.message
-            });
-        }
+    async deleteUser(id: number): Promise<any> {
+        await this.usersRepository.delete(id);
+        return { message: `ID ${id} deleted` };
     }
 }

@@ -1,42 +1,36 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { UsersDTO } from './dto/user.dto';
 import { Users } from './users.entity';
 
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) { }
-
-    @Get('/getUsers')
-    async getUsers(@Res() res) {
-        const users = await this.usersService.getUsers()
-        return res.status(HttpStatus.OK).json(users)
+    //เลือกส่ง
+    @Get('/getusers')
+    async getUsers() {
+        return await this.usersService.getUsers()
     }
 
-    @Post('/addUser')
-    async addUser(
-        @Body() createUser: Users,
-        @Res() res
-    ) {
-        const users = await this.usersService.addUser(createUser)
-        return res.status(HttpStatus.OK).json(users)
+    @Post('/createuser')
+    async createUser(
+        @Body() createUserDTO: UsersDTO
+    ): Promise<Users> {
+        return this.usersService.createUser(createUserDTO);
     }
 
-    @Patch('/updateUser/:id')
+    @Patch('/updateuser/:id')
     async updateUser(
-        @Param('id') id: number,
-        @Body() updateUser: Users,
-        @Res() res
+        @Param('id', ParseIntPipe) id: number,
+        @Body() updateUser: UsersDTO
     ) {
-        const update = await this.usersService.updateUser(+id, updateUser)
-        return res.status(HttpStatus.OK).json(update)
+        return await this.usersService.updateUser(id, updateUser)
     }
 
-    @Delete('/deleteUser/:id')
+    @Delete('/deleteuser/:id')
     async deleteUser(
-        @Param('id') id: number,
-        @Res() res
+        @Param('id', ParseIntPipe) id: number,
     ) {
-        const deleteUser = await this.usersService.deleteUser(+id)
-        return res.status(HttpStatus.OK).json(deleteUser)
+        return await this.usersService.deleteUser(id)
     }
 }
