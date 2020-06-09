@@ -21,7 +21,7 @@ export class UsersRepository extends Repository<Users> {
 
     async createUser(createUserDTO: UsersDTO): Promise<any> {
         const user = new Users();
-        const { username, password } = createUserDTO;
+        const { username, password, confirmPassword } = createUserDTO;
         const findUsername = await this.createQueryBuilder('users')
             .andWhere('users.username = :username', { username })
             .getOne()
@@ -33,6 +33,8 @@ export class UsersRepository extends Repository<Users> {
             return { message: 'password must be longer than 6' };
         } else if (findUsername) {
             return { message: 'this username already exists' };
+        } else if (password !== confirmPassword) {
+            return { message: 'wrong password' };
         }
 
         user.username = createUserDTO.username

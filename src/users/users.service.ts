@@ -21,18 +21,19 @@ export class UsersService {
     }
 
     async updateUser(id: number, updateUser: UsersDTO): Promise<any> {
-        const { username, password } = updateUser;
+        const { username, password, confirmPassword } = updateUser;
         const findUsername = await this.usersRepository.createQueryBuilder('users')
             .andWhere('users.username = :username', { username })
             .getOne()
-            
+
         if (username.length < 4) {
             return { message: 'username must be longer than 4' };
-        }
-        else if (password.length < 6) {
+        } else if (password.length < 6) {
             return { message: 'password must be longer than 6' };
         } else if (findUsername) {
             return { message: 'this username already exists' };
+        } else if (password !== confirmPassword) {
+            return { message: 'wrong password' };
         }
 
         const foundId = await this.usersRepository.findOne(id)
