@@ -6,9 +6,9 @@ import { Users } from './users.entity';
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) { }
-    //เลือกส่ง
+
     @Get('/getusers')
-    async getUsers() {
+    async getUsers(): Promise<Users> {
         return await this.usersService.getUsers()
     }
 
