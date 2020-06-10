@@ -26,29 +26,11 @@ export class UsersService {
     }
     async updateUser(id: number, updateUser: UsersDTO): Promise<any> {
         try {
-            const { username, password, confirmPassword } = updateUser;
-            const findusername = await this.usersRepository.createQueryBuilder('users')
-                .andWhere('users.username = :username', { username })
-                .getOne()
-
-            if (username.length < 4) {
-                return { message: 'username must be longer than 4' };
-            }
-            if (password.length < 6) {
-                return { message: 'password must be longer than 6' };
-            }
-            if (findusername) {
-                return { message: 'this username already exists' };
-            }
-            if (password !== confirmPassword) {
-                return { message: 'wrong password' };
+            const user = await this.usersRepository.findOne(id)
+            if (!user) {
+                return { message: 'Not found id' }
             }
 
-            const foundid = await this.usersRepository.findOne(id)
-            const user = foundid;
-
-            user.username = updateUser.username
-            user.password = this.hashpass(updateUser.password)
             user.name = updateUser.name
             user.surname = updateUser.surname
             user.nickname = updateUser.nickname
@@ -63,6 +45,8 @@ export class UsersService {
             user.postalCode = updateUser.address.postalCode
             user.country = updateUser.address.country
 
+            delete user.username;
+            delete user.password;
             await user.save();
             return user
         } catch (error) {
