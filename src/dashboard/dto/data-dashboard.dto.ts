@@ -7,24 +7,11 @@ export class Realtime {
     imgCar: string;
     numberOfcars: string;
     time: Moment;
-
-    constructor() {
-        this.newDate = moment();
-        this.id = 0;
-        this.imgCar = '';
-        this.numberOfcars = '';
-        this.time = moment();
-    }
 }
 
 export class Graph {
     date: string;
     totalCars: number;
-
-    constructor() {
-        this.date = '';
-        this.totalCars = 0;
-    }
 }
 
 export class Dashboard {
