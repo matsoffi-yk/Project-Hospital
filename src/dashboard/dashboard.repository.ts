@@ -12,7 +12,7 @@ export class DashboardRepository extends Repository<Cars> {
         try {
             const cars = await this.createQueryBuilder()
                 .getMany();
-
+                
             return cars
         } catch (error) {
             throw new NotFoundException({
