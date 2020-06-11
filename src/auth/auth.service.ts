@@ -9,9 +9,7 @@ export class AuthService {
     async validateUser(username: string, pass: string): Promise<any> {
         const user = await this.usersService.findOne(username);
         if (bcrypt.compareSync(pass, user.password)) {
-            const { password, ...result } = user;
-            return result;
+            return { success: true };
         }
-        return null;
     }
 }

@@ -58,6 +58,10 @@ export class UsersService {
     }
 
     async deleteUser(id: number): Promise<any> {
+        const user = await this.usersRepository.findOne(id)
+        if (!user) {
+            return { message: 'Not found id' }
+        }
         await this.usersRepository.delete(id);
         return { message: `ID ${id} deleted` };
     }
