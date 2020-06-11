@@ -342,7 +342,10 @@ export class DashboardService {
     //     },
     // ]
 
+    async getCars(): Promise<any> {
+        return await this.dashrepository.getCars()
+    }
     async getDashboard(): Promise<any> {
-        // return await this.dashrepository.getDashboard()
+        return await this.dashrepository.getDashboard()
     }
 }

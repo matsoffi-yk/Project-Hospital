@@ -70,7 +70,11 @@ export class UsersService {
         const founduser = await this.usersRepository.createQueryBuilder('users')
             .andWhere('users.username = :username', { username })
             .getOne()
-        console.log(founduser)
+
+        if (!founduser) {
+            return false 
+        }
+
         return founduser;
     }
 }

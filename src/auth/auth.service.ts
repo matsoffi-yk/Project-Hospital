@@ -7,9 +7,14 @@ export class AuthService {
     constructor(private usersService: UsersService) { }
 
     async validateUser(username: string, pass: string): Promise<any> {
+
         const user = await this.usersService.findOne(username);
+        if (user === false) {
+            return { success: false }
+        }
         if (bcrypt.compareSync(pass, user.password)) {
             return { success: true };
         }
+        return { success: false }
     }
 }
