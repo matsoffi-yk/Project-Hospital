@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Cars } from './dashboard.entity'
 import { InjectRepository } from '@nestjs/typeorm';
 import { DashboardRepository } from "./dashboard.repository";
 
