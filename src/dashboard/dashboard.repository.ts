@@ -1,9 +1,10 @@
 import { Repository, EntityRepository } from "typeorm"
 import { NotFoundException } from '@nestjs/common';
 import { Cars } from "./dashboard.entity";
-import { Dashboard, Graph, Realtime } from './dto/data-dashboard.dto'
+import { Dashboard } from './dto/data-dashboard.dto'
 import * as moment from 'moment';
 import 'moment-timezone'
+import { Graph } from "./dto/data-graph.dto";
 
 @EntityRepository(Cars)
 export class DashboardRepository extends Repository<Cars> {
@@ -24,15 +25,67 @@ export class DashboardRepository extends Repository<Cars> {
 
     async getDashboard(): Promise<any> {
         try {
-            const test = this.query(` 
+            const dashboard = new Dashboard()
+            const date = moment('2019-12-27 23:59:59', 'YYYY-MM-DD hh:mm:ss')
+
+            const totalCars = await this.query(` 
             select COUNT(*) from cars 
-            where date between '2019-12-27' 
-            and '2019-12-27 23:59:59'`)
-            const testa = test
-            return {
-                testa: testa
+            where date between '${date.format('YYYY-MM-DD')}'
+            and '${date.format('YYYY-MM-DD hh:mm:ss')}'
+            `)
+
+            const carParking = await this.query(` 
+            select COUNT(*) from cars 
+            where date between '${date.format('YYYY-MM-DD')}' 
+            and '${date.format('YYYY-MM-DD hh:mm:ss')}'
+            and "parkArea" = '01'
+            `)
+
+            const deliveryParking = await this.query(` 
+            select COUNT(*) from cars 
+            where date between '${date.format('YYYY-MM-DD')}'
+            and '${date.format('YYYY-MM-DD hh:mm:ss')}'
+            and "parkArea" = '02'
+            `)
+
+            const carVIP = await this.query(` 
+            select COUNT(*) from cars 
+            where date between '${date.format('YYYY-MM-DD')}'
+            and '${date.format('YYYY-MM-DD hh:mm:ss')}'
+            and "parkArea" = '03'
+            `)
+
+
+
+
+            const carData = await this.query(` 
+            select * from cars 
+            `)
+            const moments = carData.map(d => moment(d.date))
+            const lastDay = moment.min(moments)
+            // console.log(lastDay)
+            while (lastDay.format("DD-MM-YYYY") <= date.format("DD-MM-YYYY")) {
+                const _graph = new Graph()
+                _graph.date = moment(`2019-12-${lastDay.format("DD")} 23:59:59`, 'YYYY-MM-DD hh:mm:ss')
+                const total = await this.query(` 
+                 select COUNT(*) from cars 
+                 where date between '${_graph.date.format('YYYY-MM-DD')}'
+                 and '${_graph.date.format('YYYY-MM-DD hh:mm:ss')}'
+                `)
+                _graph.totalCars = total[0].count;
+                dashboard.graph.push(_graph)
+                // console.log(lastDay)
+                lastDay.add(1, 'day')
             }
-            console.log(test)
+
+            dashboard.newDate = moment('27-12-2019', "DD-MM-YYYY").tz('Asia/Bangkok')
+            dashboard.totalCars = totalCars[0].count;
+            dashboard.carParking = carParking[0].count;
+            dashboard.deliveryParking = deliveryParking[0].count;
+            dashboard.carVIP = carVIP[0].count;
+
+
+            return dashboard
         } catch (error) {
             throw new NotFoundException({
                 success: false,

@@ -347,4 +347,37 @@ export class DashboardService {
     async getDashboard(): Promise<any> {
         return await this.dashrepository.getDashboard()
     }
+
+    async getExam(province) {
+
+        console.log(await this.dashrepository.query(`SELECT
+        COUNT(subdistrict.name_th)
+    FROM
+        district,
+        province,
+        subdistrict
+    WHERE
+        province.id = district.province_id
+        and district.id = subdistrict.district_id
+        and province.name_en LIKE '${province}%'`))
+
+
+
+        return await this.dashrepository.query(`SELECT
+        province.name_en,
+        district.name_th,
+        subdistrict.name_th,
+        subdistrict.postcode
+    FROM
+        district,
+        province,
+        subdistrict
+    WHERE
+        province.id = district.province_id
+        and district.id = subdistrict.district_id
+        and province.name_en LIKE '${province}%'
+        `)
+
+
+    }
 }

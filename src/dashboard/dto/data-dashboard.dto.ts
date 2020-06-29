@@ -1,35 +1,30 @@
+import { IsString, IsDate } from 'class-validator';
 import { Moment } from "moment";
-import * as moment from "moment";
+import { Realtime } from './data-realtime.dto'
+import { Graph } from './data-graph.dto'
 
-export class Realtime {
-    newDate: Moment;
-    id: number;
-    imgCar: string;
-    numberOfcars: string;
-    time: Moment;
-}
-
-export class Graph {
-    date: string;
-    totalCars: number;
-}
 
 export class Dashboard {
+    @IsDate()
     newDate: Moment;
-    totalCars: number;
-    carParking: number;
-    deliveryParking: number;
-    carVIP: number;
+
+    @IsString()
+    totalCars: string;
+
+    @IsString()
+    carParking: string;
+
+    @IsString()
+    deliveryParking: string;
+
+    @IsString()
+    carVIP: string;
+
     realtime: Realtime[];
+
     graph: Graph[];
 
     constructor() {
-        this.newDate = moment();
-        this.totalCars = 0;
-        this.carParking = 0;
-        this.deliveryParking = 0;
-        this.carVIP = 0;
-
         this.realtime = [new Realtime()];
         this.graph = [new Graph()];
     }
