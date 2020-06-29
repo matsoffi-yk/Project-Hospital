@@ -28,6 +28,7 @@ export class Dashboard {
         this.realtime = [new Realtime()];
         this.graph = [new Graph()];
     }
+    
 }
 
 
